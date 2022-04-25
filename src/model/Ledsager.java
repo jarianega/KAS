@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Ledsager {
     private String navn;
     private ArrayList<Udflugt> udflugter;
@@ -24,7 +26,7 @@ public class Ledsager {
         udflugter.add(udflugt);
     }
 
-    // beregn pris for udflugter
+    // beregn samlet pris for udflugter
 
     public int beregnPrisForUdflugter(){
         int pris = 0;

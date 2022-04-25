@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Deltager {
     private final String navn;
@@ -50,11 +49,11 @@ public class Deltager {
         return erForedragsholder;
     }
 
-    public int getAnkomstdato() {
+    public LocalDate getAnkomstdato() {
         return ankomstdato;
     }
 
-    public int getAfrejsedato() {
+    public LocalDate getAfrejsedato() {
         return afrejsedato;
     }
 
