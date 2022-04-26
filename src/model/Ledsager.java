@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Ledsager {
-    private String navn;
+    private final String navn;
     private ArrayList<Udflugt> udflugter;
 
     Ledsager(String navn){
@@ -24,6 +24,7 @@ public class Ledsager {
 
     public void addUdflugt(Udflugt udflugt){
         udflugter.add(udflugt);
+        udflugt.ledsagere.add(this);
     }
 
     // beregn samlet pris for udflugter
