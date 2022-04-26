@@ -7,16 +7,16 @@ public class Deltager {
     private final String adresse;
     private final String byEllerLand;
     private final int tlfNr;
-    private boolean erForedragsholder;
-    private LocalDate ankomstdato;
-    private LocalDate afrejsedato;
+    private final boolean erForedragsholder;
+    private final LocalDate ankomstdato;
+    private final LocalDate afrejsedato;
     private String firmanavn;
-    private String firmaTlfNr;
+    private int firmaTlfNr;
     private Ledsager ledsager;
     private final Konference konference;
     private Hotel hotel;
 
-    public Deltager(String navn, String adresse, String byEllerLand, int tlfNr, boolean erForedragsholder, LocalDate ankomstdato, LocalDate afrejsedato, Konference konference){
+    public Deltager(String navn, String adresse, String byEllerLand, int tlfNr, boolean erForedragsholder, LocalDate ankomstdato, LocalDate afrejsedato, Konference konference) {
         this.navn = navn;
         this.adresse = adresse;
         this.byEllerLand = byEllerLand;
@@ -25,6 +25,7 @@ public class Deltager {
         this.ankomstdato = ankomstdato;
         this.afrejsedato = afrejsedato;
         this.konference = konference;
+        konference.deltagere.add(this);
     }
 
     // getters
@@ -45,7 +46,7 @@ public class Deltager {
         return tlfNr;
     }
 
-    public boolean isErForedragsholder(){
+    public boolean isErForedragsholder() {
         return erForedragsholder;
     }
 
@@ -57,12 +58,8 @@ public class Deltager {
         return afrejsedato;
     }
 
-    public String getFirmanavn() {
-        return firmanavn;
-    }
-
-    public String getFirmaTlfNr() {
-        return firmaTlfNr;
+    public String getFirma() {
+        return firmanavn + firmaTlfNr;
     }
 
     public Ledsager getLedsager() {
@@ -77,13 +74,10 @@ public class Deltager {
         return hotel;
     }
 
-    // setters
+    // setters, begge nullable
 
-    public void setFirmanavn(String firmanavn) {
+    public void setFirma(String firmanavn, int firmaTlfNr) {
         this.firmanavn = firmanavn;
-    }
-
-    public void setFirmaTlfNr(String firmaTlfNr) {
         this.firmaTlfNr = firmaTlfNr;
     }
 
@@ -91,7 +85,7 @@ public class Deltager {
         this.hotel = hotel;
     }
 
-    // create ledsager
+    // create ledsager, nullable
 
     public Ledsager createLedsager(String navn) {
         Ledsager ledsager = new Ledsager(navn);
@@ -101,7 +95,29 @@ public class Deltager {
 
     // beregn samlet pris
 
-    public int beregnSamletPris(){
-        return 0;
+    public int beregnSamletPris() {
+        int pris = 0;
+        if (firmanavn == null && !erForedragsholder) {
+            pris = pris + konference.getPris();
+        }
+        if (ledsager != null) {
+            for (Udflugt udflugt : ledsager.getUdflugter()) { // må man godt det?
+                pris = pris + udflugt.getPris();
+            }
+            pris = pris + hotel.getDobbeltPris();
+            if (hotel.getTillæg() != null) {
+                for (Tillæg tillæg : hotel.getTillæg()) {
+                    pris = pris + tillæg.getPris();
+                }
+            }
+        } else {
+            pris = pris + hotel.getEnkeltPris();
+            if (hotel.getTillæg() != null) {
+                for (Tillæg tillæg : hotel.getTillæg()) {
+                    pris = pris + tillæg.getPris();
+                }
+            }
+        }
+        return pris;
     }
 }
