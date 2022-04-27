@@ -26,4 +26,8 @@ public class Udflugt {
     public int getPris() { return this.pris; }
 
     public void setPris(int pris) { this.pris = pris; }
+
+    public ArrayList<Ledsager> getLedsagere() {
+        return ledsagere;
+    }
 }
