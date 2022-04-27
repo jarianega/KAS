@@ -29,6 +29,9 @@ public class Hotel {
     public int getPris() {return pris;}
     public int getDobbeltpris(){return dobbeltpris;}
 
+    public ArrayList<Tillæg> getTillæg() {
+        return tillæg;
+    }
     // setters
 
     public void setNavn(String hotelnavn) {this.hotelnavn = hotelnavn;}

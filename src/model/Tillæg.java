@@ -11,4 +11,7 @@ public class Tillæg {
         this.pris = pris;
     }
 
+    public int getPris() {
+        return pris;
+    }
 }

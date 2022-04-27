@@ -109,12 +109,12 @@ public class Deltager {
             for (Udflugt udflugt : ledsager.getUdflugter()) {
                 pris += udflugt.getPris();
             }
-            pris += hotel.getDobbeltPris() * antalOvernatninger;
+            pris += hotel.getDobbeltpris() * antalOvernatninger;
             for (Tillæg tillæg : hotel.getTillæg()) {
                     pris += tillæg.getPris();
             }
         } else {
-            pris += hotel.getEnkeltPris() * antalOvernatninger;
+            pris += hotel.getPris() * antalOvernatninger;
             for (Tillæg tillæg : hotel.getTillæg()) {
                     pris += tillæg.getPris();
             }
