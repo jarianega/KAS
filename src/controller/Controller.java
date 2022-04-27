@@ -122,8 +122,8 @@ public class Controller {
         deltager.setHotel(hotel);
     }
 
-    public static void addTillægTilHotelPåDeltager(Tillæg tillæg, Hotel hotel, Deltager deltager){
-        deltager.getHotel().getTillæg().add(tillæg);
+    public static void addTillægTilDeltager(Tillæg tillæg, Deltager deltager){
+        deltager.addTillæg(tillæg);
     }
 
     public static void addUdflugtTilLedsagerPåDeltager(Udflugt udflugt, Deltager deltager){

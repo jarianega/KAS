@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -17,6 +18,7 @@ public class Deltager {
     private Ledsager ledsager;
     private final Konference konference;
     private Hotel hotel;
+    private ArrayList<Tillæg> tillæg;
 
     public Deltager(String navn, String adresse, String byEllerLand, int tlfNr, boolean erForedragsholder, LocalDate ankomstdato, LocalDate afrejsedato, Konference konference) {
         this.navn = navn;
@@ -80,6 +82,10 @@ public class Deltager {
         return hotel;
     }
 
+    public ArrayList<Tillæg> getTillæg() {
+        return tillæg;
+    }
+
     // setters, begge nullable
 
     public void setFirmanavn(String firmanavn) {
@@ -92,6 +98,12 @@ public class Deltager {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    // add tillæg
+
+    public void addTillæg(Tillæg tillæg){
+        this.tillæg.add(tillæg);
     }
 
     // create ledsager, nullable
@@ -118,12 +130,12 @@ public class Deltager {
                 pris += udflugt.getPris();
             }
             pris += hotel.getDobbeltpris() * antalOvernatninger;
-            for (Tillæg tillæg : hotel.getTillæg()) {
+            for (Tillæg tillæg : tillæg) {
                     pris += tillæg.getPris();
             }
         } else {
             pris += hotel.getPris() * antalOvernatninger;
-            for (Tillæg tillæg : hotel.getTillæg()) {
+            for (Tillæg tillæg : tillæg) {
                     pris += tillæg.getPris();
             }
         }
