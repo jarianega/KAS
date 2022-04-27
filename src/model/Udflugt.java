@@ -9,6 +9,12 @@ public class Udflugt {
     private int pris;
     ArrayList<Ledsager> ledsagere;
 
+    public Udflugt(String beskrivelse, LocalDate dato, int pris){
+        this.beskrivelse = beskrivelse;
+        this.dato = dato;
+        this.pris = pris;
+    }
+
     public String getBeskrivelse() { return this.beskrivelse; }
 
     public void setBeskrivelse(String beskrivelse) { this.beskrivelse = beskrivelse; }

@@ -14,12 +14,13 @@ public class Konference {
     private Organisation organisation;
     private int pris;
 
-    public Konference(String sted, LocalDate startDato, LocalDate slutDato, ArrayList<Hotel> hoteller, ArrayList<Udflugt> udflugter) {
+    public Konference(String sted, LocalDate startDato, LocalDate slutDato, ArrayList<Hotel> hoteller, ArrayList<Udflugt> udflugter, int pris) {
         this.sted = sted;
         this.startDato = startDato;
         this.slutDato = slutDato;
         this.hoteller = hoteller;
         this.udflugter = udflugter;
+        this.pris = pris;
     }
 
     public void tilføjHotel(ArrayList<Hotel> hoteller) { this.hoteller.addAll(hoteller); }
