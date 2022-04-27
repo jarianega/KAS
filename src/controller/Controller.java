@@ -112,7 +112,7 @@ public class Controller {
     }
 
     public static void addUdflugtTilLedsagerPåDeltager(Udflugt udflugt, Deltager deltager){
-
+        deltager.getLedsager().addUdflugt(udflugt);
     }
 
 }
