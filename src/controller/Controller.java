@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import org.jetbrains.annotations.NotNull;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -101,18 +102,31 @@ public class Controller {
     }*/
 
 
-    // opret tilmelding: add metoder
+    // opret konference: add metoder
 
-    public static void addHotelToDeltager(Hotel hotel, Deltager deltager){
-        deltager.setHotel(hotel);
+    public static void addHotelTilKonference(@NotNull Konference konference, ArrayList<Hotel> hoteller){
+        konference.tilføjHotel(hoteller);
     }
 
     public static void addTillægTilHotel(Tillæg tillæg, Hotel hotel){
         hotel.getTillæg().add(tillæg);
     }
 
+    public static void addUdflugtTilKonference(Konference konference, ArrayList<Udflugt> udflugter){
+        konference.tilføjUdflugt(udflugter);
+    }
+
+    // opret tilmelding: add metoder
+
+    public static void addHotelTilDeltager(Hotel hotel, Deltager deltager){
+        deltager.setHotel(hotel);
+    }
+
+    public static void addTillægTilHotelPåDeltager(Tillæg tillæg, Hotel hotel, Deltager deltager){
+        deltager.getHotel().getTillæg().add(tillæg);
+    }
+
     public static void addUdflugtTilLedsagerPåDeltager(Udflugt udflugt, Deltager deltager){
         deltager.getLedsager().addUdflugt(udflugt);
     }
-
 }
