@@ -34,8 +34,6 @@ public class Konference {
     public ArrayList<String> getDeltagereString() {
         ArrayList<String> deltagerListe = new ArrayList<>();
         for(int i = 0; i < deltagere.size(); i++){
-            deltagerListe.add("Deltager " + (i+1));
-
             String navn = deltagere.get(i).getNavn();
             deltagerListe.add(navn);
 
@@ -68,9 +66,9 @@ public class Konference {
         ArrayList<String> udflugtListe = new ArrayList<>();
 
         for(int i = 0; i < udflugter.size(); i++){
-            udflugtListe.add("Udflugt " + (i+1));
-            udflugtListe.add("Deltagende ledsagere:");
+            udflugtListe.add(udflugter.get(i).getBeskrivelse());
 
+            udflugtListe.add("Deltagende ledsagere:");
             for(Ledsager ledsager : udflugter.get(i).getLedsagere()){
                 String ledsagernavn = ledsager.getNavn();
                 String deltagernavn = ledsager.getDeltager().getNavn();
@@ -87,7 +85,7 @@ public class Konference {
 
         for(int i = 0; i < hoteller.size(); i++){
             if(!hoteller.get(i).getDeltagere().isEmpty()){
-                hotelListe.add("Hotel " + (i+1));
+                hotelListe.add(hoteller.get(i).getHotelnavn());
             }
 
             for(Deltager deltager : hoteller.get(i).getDeltagere()){
