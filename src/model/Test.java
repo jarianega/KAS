@@ -1,5 +1,6 @@
 package model;
 
+import controller.Controller;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ public class Test {
 
 
         Deltager d1 = new Deltager("Finn Madsen", "Bogfinkevej 420", "København", 88888888, false, LocalDate.of(2021,12,18), LocalDate.of(2021,12,20), k1);
-
+        Controller.createDeltager("Finn Madsen", "Bogfinkevej 420", "København", 88888888, false, LocalDate.of(2021,12,18), LocalDate.of(2021,12,20), k1);
         Deltager d2 = new Deltager("Niels Petersen","Aggervej 22", "Agger", 21212121, false,LocalDate.of(2021,12,18), LocalDate.of(2021,12,20), k1);
         Deltager d3 = new Deltager("Ulla Hansen","Romvej 99","Sønderborg",11223344,false, LocalDate.of(2021,12,18), LocalDate.of(2021,12,19), k1);
         Deltager d4 = new Deltager("Peter Sommer","Nørrebrogade 47", "København", 20202020,false,LocalDate.of(2021,12,18), LocalDate.of(2021,12,20), k1);
