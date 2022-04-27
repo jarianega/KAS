@@ -8,8 +8,8 @@ public class Konference {
     private String sted;
     private LocalDate startDato;
     private LocalDate slutDato;
-    private ArrayList<Hotel> hoteller;
-    ArrayList<Udflugt> udflugter;
+    private ArrayList<Hotel> hoteller = new ArrayList<>();
+    ArrayList<Udflugt> udflugter = new ArrayList<>();
     ArrayList<Deltager> deltagere = new ArrayList<>();
     private Organisation organisation;
     private int pris;
@@ -59,8 +59,6 @@ public class Konference {
                 String firmanavn = deltagere.get(i).getFirmanavn();
                 deltagerListe.add("Firma: " + firmanavn);
             }
-
-            deltagerListe.add("\n");
         }
 
         return deltagerListe;
@@ -70,7 +68,8 @@ public class Konference {
         ArrayList<String> udflugtListe = new ArrayList<>();
 
         for(int i = 0; i < udflugter.size(); i++){
-            udflugtListe.add("Udflugt " + (i+1) + "\n Deltagende ledsagere:");
+            udflugtListe.add("Udflugt " + (i+1));
+            udflugtListe.add("Deltagende ledsagere:");
 
             for(Ledsager ledsager : udflugter.get(i).getLedsagere()){
                 String ledsagernavn = ledsager.getNavn();
@@ -78,8 +77,6 @@ public class Konference {
                 String deltagertlf = Integer.toString(ledsager.getDeltager().getTlfNr());
                 udflugtListe.add(ledsagernavn + " (" + deltagernavn + " " + deltagertlf + ")");
             }
-
-            udflugtListe.add("\n");
         }
 
         return udflugtListe;
@@ -90,7 +87,7 @@ public class Konference {
 
         for(int i = 0; i < hoteller.size(); i++){
             if(!hoteller.get(i).getDeltagere().isEmpty()){
-                hotelListe.add("Hotel " + (i+1) + "\n");
+                hotelListe.add("Hotel " + (i+1));
             }
 
             for(Deltager deltager : hoteller.get(i).getDeltagere()){
@@ -104,8 +101,6 @@ public class Konference {
                 for(Tillæg tillæg : deltager.getTillæg()){
                     hotelListe.add("tillæg: " + tillæg.getNavn());
                 }
-
-                hotelListe.add("\n");
             }
         }
 

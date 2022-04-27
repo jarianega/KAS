@@ -1,7 +1,6 @@
 package controller;
 
 import model.*;
-import org.jetbrains.annotations.NotNull;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -11,8 +10,8 @@ public class Controller {
 
     // Hotel
 
-    public static Hotel createHotel(String hotelnavn, int pris, int dobbeltpris, ArrayList<Tillæg> tillæg){
-        Hotel hotel = new Hotel(hotelnavn,pris,dobbeltpris, tillæg);
+    public static Hotel createHotel(String hotelnavn, int pris, int dobbeltpris){
+        Hotel hotel = new Hotel(hotelnavn,pris,dobbeltpris);
         Storage.storeHotel(hotel);
         return hotel;
     }
@@ -27,15 +26,15 @@ public class Controller {
 
     // Tillæg
 
-    public static Tillæg createTillæg(String navn, int pris){
-        Tillæg tillæg = new Tillæg(navn,pris);
+    /*public static Tillæg createTillæg(Hotel hotel, String navn, int pris){
+        hotel.createTillæg(navn,int);
         Storage.storeTillæg(tillæg);
         return tillæg;
     }
 
     public static ArrayList<Tillæg> getTillæg(){
         return Storage.getTillæg();
-    }
+    }*/
 
     /*public static void deleteTillæg(Tillæg tillæg){
         Storage.deleteTillæg(tillæg);
@@ -104,13 +103,13 @@ public class Controller {
 
     // opret konference: add metoder
 
-    public static void addHotelTilKonference(@NotNull Konference konference, ArrayList<Hotel> hoteller){
+    public static void addHotelTilKonference(Konference konference, ArrayList<Hotel> hoteller){
         konference.tilføjHotel(hoteller);
     }
 
-    /*public static void addTillægTilHotel(Tillæg tillæg, Hotel hotel){
-        hotel.getTillæg().add(tillæg);
-    }*/
+    public static Tillæg createAndAddTillægTilHotel(Hotel hotel, String navn, int pris){
+        return hotel.createTillæg(navn, pris);
+    }
 
     /*public static void addUdflugtTilKonference(Konference konference, ArrayList<Udflugt> udflugter){
         konference.tilføjUdflugt(udflugter);
@@ -126,8 +125,8 @@ public class Controller {
         deltager.addTillæg(tillæg);
     }
 
-    public static void addLedsagerTilDeltager(Deltager deltager, String navn){
-        deltager.createLedsager(navn);
+    public static Ledsager createAndAddLedsagerTilDeltager(Deltager deltager, String navn){
+        return deltager.createLedsager(navn);
     }
 
     public static void addUdflugtTilLedsagerPåDeltager(Udflugt udflugt, Deltager deltager){

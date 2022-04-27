@@ -6,8 +6,9 @@ public class Tillæg {
     public String navn;
     public int pris;
     ArrayList<Deltager> deltagere = new ArrayList<>();
+    Hotel hotel;
 
-    public Tillæg(String navn, int pris) {
+    Tillæg(String navn, int pris) {
         this.navn = navn;
         this.pris = pris;
     }

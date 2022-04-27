@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Storage {
     private static final ArrayList<Hotel> hoteller = new ArrayList<>();
-    private static final ArrayList<Tillæg> tillæg = new ArrayList<>();
+    // private static final ArrayList<Tillæg> tillæg = new ArrayList<>();
     private static final ArrayList<Udflugt> udflugter = new ArrayList<>();
     private static final ArrayList<Konference> konferencer = new ArrayList<>();
     private static final ArrayList<Deltager> deltagere = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Storage {
 
     // Tillæg
 
-    public static ArrayList<Tillæg> getTillæg() {
+    /*public static ArrayList<Tillæg> getTillæg() {
         return new ArrayList<>(tillæg);
     }
 
@@ -36,7 +36,7 @@ public class Storage {
         Storage.tillæg.add(tillæg);
     }
 
-    /*public static void deleteTillæg(Tillæg tillæg){
+    *//*public static void deleteTillæg(Tillæg tillæg){
         Storage.tillæg.remove(tillæg);
     }*/
 
