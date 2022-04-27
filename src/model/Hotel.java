@@ -29,6 +29,11 @@ public class Hotel {
     public ArrayList<Tillæg> getTillæg() {
         return tillæg;
     }
+
+    public ArrayList<Deltager> getDeltagere() {
+        return deltagere;
+    }
+
     // setters
 
     public void setNavn(String hotelnavn) {this.hotelnavn = hotelnavn;}

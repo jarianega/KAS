@@ -60,8 +60,12 @@ public class Deltager {
         return afrejsedato;
     }
 
-    public String getFirma() {
-        return firmanavn + firmaTlfNr;
+    public String getFirmanavn() {
+        return firmanavn;
+    }
+
+    public int getFirmaTlfNr() {
+        return firmaTlfNr;
     }
 
     public Ledsager getLedsager() {
@@ -78,8 +82,11 @@ public class Deltager {
 
     // setters, begge nullable
 
-    public void setFirma(String firmanavn, int firmaTlfNr) {
+    public void setFirmanavn(String firmanavn) {
         this.firmanavn = firmanavn;
+    }
+
+    public void setFirmaTlfNr(int firmaTlfNr) {
         this.firmaTlfNr = firmaTlfNr;
     }
 
@@ -92,6 +99,7 @@ public class Deltager {
     public Ledsager createLedsager(String navn) {
         Ledsager ledsager = new Ledsager(navn);
         this.ledsager = ledsager;
+        ledsager.deltager = this;
         return ledsager;
     }
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Ledsager {
     private final String navn;
     private ArrayList<Udflugt> udflugter;
+    Deltager deltager;
 
     Ledsager(String navn){
         this.navn = navn;
@@ -19,6 +20,10 @@ public class Ledsager {
 
     public ArrayList<Udflugt> getUdflugter() {
         return new ArrayList<>(udflugter);
+    }
+
+    public Deltager getDeltager() {
+        return deltager;
     }
 
     // add udflugt
