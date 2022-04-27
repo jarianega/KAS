@@ -10,19 +10,23 @@ public class Konference {
     private LocalDate slutDato;
     private ArrayList<Hotel> hoteller;
     private ArrayList<Udflugt> udflugter;
-    private ArrayList<Deltager> deltager;
+    ArrayList<Deltager> deltagere;
     private Organisation organisation;
+    private int pris;
 
-    public Konference(String sted, LocalDate startDato, LocalDate slutDato, ArrayList<Hotel> hoteller, ArrayList<Udflugt> udflugter, ArrayList<Deltager> deltager) {
+    public Konference(String sted, LocalDate startDato, LocalDate slutDato, ArrayList<Hotel> hoteller, ArrayList<Udflugt> udflugter) {
         this.sted = sted;
         this.startDato = startDato;
         this.slutDato = slutDato;
         this.hoteller = hoteller;
         this.udflugter = udflugter;
-        this.deltager = deltager;
     }
 
     public void tilføjHotel(ArrayList<Hotel> hoteller) { this.hoteller.addAll(hoteller); }
 
     public void tilføjUdflugt(ArrayList<Udflugt> udflugter) { this.udflugter.addAll(udflugter); }
+
+    public int getPris() {
+        return pris;
+    }
 }

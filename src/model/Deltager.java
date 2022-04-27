@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class Deltager {
     private final String navn;
     private final String adresse;
@@ -97,27 +99,24 @@ public class Deltager {
 
     public int beregnSamletPris() {
         int pris = 0;
+
         if (firmanavn == null && !erForedragsholder) {
             pris += konference.getPris();
         }
 
+        long antalOvernatninger = DAYS.between(ankomstdato, afrejsedato);
         if (ledsager != null) {
             for (Udflugt udflugt : ledsager.getUdflugter()) {
                 pris += udflugt.getPris();
             }
-            pris = pris + hotel.getDobbeltPris();
-            if (hotel.getTillæg() != null) {
-                for (Tillæg tillæg : hotel.getTillæg()) {
+            pris += hotel.getDobbeltPris() * antalOvernatninger;
+            for (Tillæg tillæg : hotel.getTillæg()) {
                     pris += tillæg.getPris();
-                }
-            } // tip: hvis der ikke er nogle tillæg på hotellet, så kan vi returnere en tom arrayliste i getTillæg(),
-              // så kan vi undgå if-sætningen, for så løber for-loopet igennem ingenting - som jeg nu har gjort det under ledsager
+            }
         } else {
-            pris = pris + hotel.getEnkeltPris();
-            if (hotel.getTillæg() != null) {
-                for (Tillæg tillæg : hotel.getTillæg()) {
+            pris += hotel.getEnkeltPris() * antalOvernatninger;
+            for (Tillæg tillæg : hotel.getTillæg()) {
                     pris += tillæg.getPris();
-                }
             }
         }
         return pris;

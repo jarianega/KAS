@@ -7,7 +7,7 @@ public class Udflugt {
     private String beskrivelse;
     private LocalDate dato;
     private int pris;
-    private ArrayList<Ledsager> ledsager;
+    ArrayList<Ledsager> ledsagere;
 
     public String getBeskrivelse() { return this.beskrivelse; }
 
