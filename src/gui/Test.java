@@ -18,6 +18,8 @@ public class Test {
         Deltager d2 = Controller.createDeltager("Niels Petersen","Aggervej 22", "Agger", 21212121, false,LocalDate.of(2021,12,18), LocalDate.of(2021,12,20), k1);
         d2.setHotel(h1);
         Deltager d3 = Controller.createDeltager("Ulla Hansen","Romvej 99","Sønderborg",11223344,false, LocalDate.of(2021,12,18), LocalDate.of(2021,12,19), k1);
+        l3 = d3.createLedsager("Hans Hansen");
+        l3.addUdflugt(u2);
 
         Deltager d4 = Controller.createDeltager("Peter Sommer","Nørrebrogade 47", "København", 20202020,false,LocalDate.of(2021,12,18), LocalDate.of(2021,12,20), k1);
         d4.setHotel(h1);
