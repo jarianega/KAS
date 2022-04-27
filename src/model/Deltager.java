@@ -104,6 +104,7 @@ public class Deltager {
 
     public void addTillæg(Tillæg tillæg){
         this.tillæg.add(tillæg);
+        tillæg.deltagere.add(this);
     }
 
     // create ledsager, nullable
