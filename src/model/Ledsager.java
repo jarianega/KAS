@@ -8,6 +8,7 @@ public class Ledsager {
 
     Ledsager(String navn){
         this.navn = navn;
+        this.udflugter = new ArrayList<>();
     }
 
     // getters
@@ -17,7 +18,7 @@ public class Ledsager {
     }
 
     public ArrayList<Udflugt> getUdflugter() {
-        return udflugter;
+        return new ArrayList<>(udflugter);
     }
 
     // add udflugt
