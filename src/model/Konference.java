@@ -95,6 +95,10 @@ public class Konference {
                 String deltagernavn = deltager.getNavn();
                 String ledsagernavn = deltager.getLedsager().getNavn();
                 hotelListe.add("Booking: " + deltagernavn +" og " + ledsagernavn + "\n");
+
+                for(Tillæg tillæg : deltager.getTillæg()){
+                    hotelListe.add("Tillæg: " + tillæg.getNavn() + "\n");
+                }
             }
         }
 
