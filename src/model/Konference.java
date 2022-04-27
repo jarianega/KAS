@@ -9,17 +9,15 @@ public class Konference {
     private LocalDate startDato;
     private LocalDate slutDato;
     private ArrayList<Hotel> hoteller;
-    private ArrayList<Udflugt> udflugter;
+    ArrayList<Udflugt> udflugter;
     ArrayList<Deltager> deltagere = new ArrayList<>();
     private Organisation organisation;
     private int pris;
 
-    public Konference(String sted, LocalDate startDato, LocalDate slutDato, ArrayList<Hotel> hoteller, ArrayList<Udflugt> udflugter, int pris) {
+    public Konference(String sted, LocalDate startDato, LocalDate slutDato, int pris) {
         this.sted = sted;
         this.startDato = startDato;
         this.slutDato = slutDato;
-        this.hoteller = hoteller;
-        this.udflugter = udflugter;
         this.pris = pris;
     }
 
@@ -36,7 +34,7 @@ public class Konference {
     public ArrayList<String> getDeltagereString() {
         ArrayList<String> deltagerListe = new ArrayList<>();
         for(int i = 0; i < deltagere.size(); i++){
-            deltagerListe.add("Deltager " + i+1);
+            deltagerListe.add("Deltager " + (i+1));
 
             String navn = deltagere.get(i).getNavn();
             deltagerListe.add(navn);
@@ -54,11 +52,13 @@ public class Konference {
             deltagerListe.add(foredragsholder);
 
             String deltagerdatoer = "Deltager fra " + deltagere.get(i).getAnkomstdato().toString() +
-                    "til " + deltagere.get(i).getAfrejsedato().toString();
+                    " til " + deltagere.get(i).getAfrejsedato().toString();
             deltagerListe.add(deltagerdatoer);
 
-            String firmanavn = deltagere.get(i).getFirmanavn();
-            deltagerListe.add("Firma: " + firmanavn);
+            if(deltagere.get(i).getFirmanavn() != null){
+                String firmanavn = deltagere.get(i).getFirmanavn();
+                deltagerListe.add("Firma: " + firmanavn);
+            }
 
             deltagerListe.add("\n");
         }
@@ -70,13 +70,13 @@ public class Konference {
         ArrayList<String> udflugtListe = new ArrayList<>();
 
         for(int i = 0; i < udflugter.size(); i++){
-            udflugtListe.add("Udflugt " + i+1 + "\n Deltagende ledsagere:");
+            udflugtListe.add("Udflugt " + (i+1) + "\n Deltagende ledsagere:");
 
             for(Ledsager ledsager : udflugter.get(i).getLedsagere()){
                 String ledsagernavn = ledsager.getNavn();
                 String deltagernavn = ledsager.getDeltager().getNavn();
                 String deltagertlf = Integer.toString(ledsager.getDeltager().getTlfNr());
-                udflugtListe.add(ledsagernavn + "(" + deltagernavn + " " + deltagertlf + ")");
+                udflugtListe.add(ledsagernavn + " (" + deltagernavn + " " + deltagertlf + ")");
             }
 
             udflugtListe.add("\n");
@@ -89,16 +89,23 @@ public class Konference {
         ArrayList<String> hotelListe = new ArrayList<>();
 
         for(int i = 0; i < hoteller.size(); i++){
-            hotelListe.add("Hotel" + i+1);
+            if(!hoteller.get(i).getDeltagere().isEmpty()){
+                hotelListe.add("Hotel " + (i+1) + "\n");
+            }
 
             for(Deltager deltager : hoteller.get(i).getDeltagere()){
                 String deltagernavn = deltager.getNavn();
-                String ledsagernavn = deltager.getLedsager().getNavn();
-                hotelListe.add("Booking: " + deltagernavn +" og " + ledsagernavn + "\n");
+                String ledsagernavn = "";
+                if(deltager.getLedsager() != null){
+                    ledsagernavn = " og " + deltager.getLedsager().getNavn();
+                }
+                hotelListe.add("Booking: " + deltagernavn + ledsagernavn);
 
                 for(Tillæg tillæg : deltager.getTillæg()){
-                    hotelListe.add("Tillæg: " + tillæg.getNavn() + "\n");
+                    hotelListe.add("tillæg: " + tillæg.getNavn());
                 }
+
+                hotelListe.add("\n");
             }
         }
 

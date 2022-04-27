@@ -38,10 +38,6 @@ public class Deltager {
         return navn;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
     public String getByEllerLand() {
         return byEllerLand;
     }
@@ -74,10 +70,6 @@ public class Deltager {
         return ledsager;
     }
 
-    public Konference getKonference() {
-        return konference;
-    }
-
     public Hotel getHotel() {
         return hotel;
     }
@@ -98,9 +90,10 @@ public class Deltager {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+        hotel.deltagere.add(this);
     }
 
-    // add tillæg
+    // add tillæg, nullable
 
     public void addTillæg(Tillæg tillæg){
         this.tillæg.add(tillæg);

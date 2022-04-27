@@ -8,11 +8,14 @@ public class Udflugt {
     private LocalDate dato;
     private int pris;
     ArrayList<Ledsager> ledsagere = new ArrayList<>();
+    private Konference konference;
 
-    public Udflugt(String beskrivelse, LocalDate dato, int pris){
+    public Udflugt(String beskrivelse, LocalDate dato, int pris, Konference konference){
         this.beskrivelse = beskrivelse;
         this.dato = dato;
         this.pris = pris;
+        this.konference = konference;
+        konference.udflugter.add(this);
     }
 
     public String getBeskrivelse() { return this.beskrivelse; }

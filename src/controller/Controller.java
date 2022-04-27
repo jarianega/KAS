@@ -43,8 +43,8 @@ public class Controller {
 
     // Udflugt
 
-    public static Udflugt createUdflugt(String beskrivelse, LocalDate dato, int pris){
-        Udflugt udflugt = new Udflugt(beskrivelse, dato,pris);
+    public static Udflugt createUdflugt(String beskrivelse, LocalDate dato, int pris, Konference konference){
+        Udflugt udflugt = new Udflugt(beskrivelse, dato, pris, konference);
         Storage.storeUdflugt(udflugt);
         return udflugt;
     }
@@ -124,6 +124,10 @@ public class Controller {
 
     public static void addTillægTilDeltager(Tillæg tillæg, Deltager deltager){
         deltager.addTillæg(tillæg);
+    }
+
+    public static void addLedsagerTilDeltager(Deltager deltager, String navn){
+        deltager.createLedsager(navn);
     }
 
     public static void addUdflugtTilLedsagerPåDeltager(Udflugt udflugt, Deltager deltager){
