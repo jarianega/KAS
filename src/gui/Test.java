@@ -22,12 +22,20 @@ public class Test {
         Deltager d4 = Controller.createDeltager("Peter Sommer","Nørrebrogade 47", "København", 20202020,false,LocalDate.of(2021,12,18), LocalDate.of(2021,12,20), k1);
         d4.setHotel(h1);
         d4.addTillæg(t1);
-        d4.createLedsager("Mie Sommer");
+        l1 = d4.createLedsager("Mie Sommer");
+        l1.addUdflugt(u2);
+        l1.addUdflugt(u3);
+
 
         Deltager d5 = Controller.createDeltager("Lone Jensen","Stjernegade 1","Aarhus",12345678,true,LocalDate.of(2021,12,18), LocalDate.of(2021,12,20), k1);
         d5.setHotel(h1);
         d5.addTillæg(t1);
-        d5.createLedsager("Jan Madsen");
+        l2 = d5.createLedsager("Jan Madsen");
+        l2.addUdflugt(u2);
+        l2.addUdflugt(u1);
+
+
+
 
         Udflugt u1 = Controller.createUdflugt("Byrundtur Odense",localdate.of(2021,12,18),125);
         Udflugt u2 = Controller.createUdflugt("Egeskov",localdate.of(2021,12,19),75);
