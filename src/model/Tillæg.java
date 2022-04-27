@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Tillæg {
     public String navn;
     public int pris;
-    ArrayList<Deltager> deltagere;
+    ArrayList<Deltager> deltagere = new ArrayList<>();
 
     public Tillæg(String navn, int pris) {
         this.navn = navn;

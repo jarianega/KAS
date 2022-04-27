@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Ledsager {
     private final String navn;
-    private ArrayList<Udflugt> udflugter;
+    private ArrayList<Udflugt> udflugter = new ArrayList<>();
     Deltager deltager;
 
     Ledsager(String navn){

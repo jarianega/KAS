@@ -7,7 +7,7 @@ public class Udflugt {
     private String beskrivelse;
     private LocalDate dato;
     private int pris;
-    ArrayList<Ledsager> ledsagere;
+    ArrayList<Ledsager> ledsagere = new ArrayList<>();
 
     public Udflugt(String beskrivelse, LocalDate dato, int pris){
         this.beskrivelse = beskrivelse;

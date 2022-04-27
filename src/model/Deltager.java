@@ -18,7 +18,7 @@ public class Deltager {
     private Ledsager ledsager;
     private final Konference konference;
     private Hotel hotel;
-    private ArrayList<Tillæg> tillæg;
+    private ArrayList<Tillæg> tillæg = new ArrayList<>();
 
     public Deltager(String navn, String adresse, String byEllerLand, int tlfNr, boolean erForedragsholder, LocalDate ankomstdato, LocalDate afrejsedato, Konference konference) {
         this.navn = navn;
@@ -121,23 +121,29 @@ public class Deltager {
     public int beregnSamletPris() {
         int pris = 0;
 
+        long antalDage = DAYS.between(ankomstdato, afrejsedato)+1;
+
         if (firmanavn == null && !erForedragsholder) {
-            pris += konference.getPris();
+            pris += konference.getPris() * antalDage;
         }
 
-        long antalOvernatninger = DAYS.between(ankomstdato, afrejsedato);
+        long antalOvernatninger = antalDage-1;
         if (ledsager != null) {
             for (Udflugt udflugt : ledsager.getUdflugter()) {
                 pris += udflugt.getPris();
             }
-            pris += hotel.getDobbeltpris() * antalOvernatninger;
-            for (Tillæg tillæg : tillæg) {
-                    pris += tillæg.getPris();
+            if(hotel != null){
+                pris += hotel.getDobbeltpris() * antalOvernatninger;
+                for (Tillæg tillæg : tillæg) {
+                    pris += tillæg.getPris() * antalOvernatninger;
+                }
             }
         } else {
-            pris += hotel.getPris() * antalOvernatninger;
-            for (Tillæg tillæg : tillæg) {
-                    pris += tillæg.getPris();
+            if(hotel != null){
+                pris += hotel.getPris() * antalOvernatninger;
+                for (Tillæg tillæg : tillæg) {
+                    pris += tillæg.getPris() * antalOvernatninger;
+                }
             }
         }
         return pris;

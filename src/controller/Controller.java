@@ -11,8 +11,8 @@ public class Controller {
 
     // Hotel
 
-    public static Hotel createHotel(String hotelnavn, int pris, int dobbeltpris, ArrayList<Deltager> deltagere, ArrayList<Tillæg> tillæg){
-        Hotel hotel = new Hotel(hotelnavn,pris,dobbeltpris, deltagere, tillæg);
+    public static Hotel createHotel(String hotelnavn, int pris, int dobbeltpris, ArrayList<Tillæg> tillæg){
+        Hotel hotel = new Hotel(hotelnavn,pris,dobbeltpris, tillæg);
         Storage.storeHotel(hotel);
         return hotel;
     }
@@ -59,8 +59,8 @@ public class Controller {
 
     // Konference
 
-    public static Konference createKonference(String sted, LocalDate startDato, LocalDate slutDato, ArrayList<Hotel> hoteller, ArrayList<Udflugt> udflugter, int pris){
-        Konference konference = new Konference(sted, startDato, slutDato, hoteller, udflugter, pris);
+    public static Konference createKonference(String sted, LocalDate startDato, LocalDate slutDato, int pris){
+        Konference konference = new Konference(sted, startDato, slutDato, pris);
         Storage.storeKonference(konference);
         return konference;
     }
@@ -108,13 +108,13 @@ public class Controller {
         konference.tilføjHotel(hoteller);
     }
 
-    public static void addTillægTilHotel(Tillæg tillæg, Hotel hotel){
+    /*public static void addTillægTilHotel(Tillæg tillæg, Hotel hotel){
         hotel.getTillæg().add(tillæg);
-    }
+    }*/
 
-    public static void addUdflugtTilKonference(Konference konference, ArrayList<Udflugt> udflugter){
+    /*public static void addUdflugtTilKonference(Konference konference, ArrayList<Udflugt> udflugter){
         konference.tilføjUdflugt(udflugter);
-    }
+    }*/
 
     // opret tilmelding: add metoder
 

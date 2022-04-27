@@ -10,7 +10,7 @@ public class Konference {
     private LocalDate slutDato;
     private ArrayList<Hotel> hoteller;
     private ArrayList<Udflugt> udflugter;
-    ArrayList<Deltager> deltagere;
+    ArrayList<Deltager> deltagere = new ArrayList<>();
     private Organisation organisation;
     private int pris;
 

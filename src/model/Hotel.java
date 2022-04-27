@@ -10,7 +10,7 @@ public class Hotel {
     private ArrayList<Deltager> deltagere;
     private ArrayList<Tillæg> tillæg;
 
-    public Hotel(String hotelnavn, int pris, int dobbeltpris, ArrayList<Deltager> deltagere, ArrayList<Tillæg> tillæg) {
+    public Hotel(String hotelnavn, int pris, int dobbeltpris, ArrayList<Tillæg> tillæg) {
         this.hotelnavn = hotelnavn;
         this.pris = pris;
         this.dobbeltpris = dobbeltpris;
