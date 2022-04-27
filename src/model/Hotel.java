@@ -17,8 +17,8 @@ public class Hotel {
         this.deltagere = deltagere;
         this.tillæg = tillæg;
     }
-
     // getters
+    new Hotel(String "Hav og himmel", LocalDate )
 
     public String getHotelnavn() {
         return hotelnavn;
