@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Ledsager {
     private final String navn;
-    private ArrayList<Udflugt> udflugter = new ArrayList<>();
+    private ArrayList<Udflugt> udflugter;
     Deltager deltager;
 
     Ledsager(String navn){
@@ -38,7 +38,7 @@ public class Ledsager {
     public int beregnPrisForUdflugter(){
         int pris = 0;
         for(Udflugt udflugt : udflugter){
-            pris = pris + udflugt.getPris();
+            pris += udflugt.getPris();
         }
         return pris;
     }

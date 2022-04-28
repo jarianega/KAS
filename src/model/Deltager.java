@@ -122,9 +122,7 @@ public class Deltager {
 
         long antalOvernatninger = antalDage-1;
         if (ledsager != null) {
-            for (Udflugt udflugt : ledsager.getUdflugter()) {
-                pris += udflugt.getPris();
-            }
+            ledsager.beregnPrisForUdflugter();
             if(hotel != null){
                 pris += hotel.getDobbeltpris() * antalOvernatninger;
                 for (Tillæg tillæg : tillæg) {

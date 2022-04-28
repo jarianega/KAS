@@ -20,25 +20,6 @@ public class Controller {
         return Storage.getHoteller();
     }
 
-    /*public static void deleteHotel(Hotel hotel){
-        Storage.deleteHotel(hotel);
-    }*/
-
-    // Tillæg
-
-    /*public static Tillæg createTillæg(Hotel hotel, String navn, int pris){
-        hotel.createTillæg(navn,int);
-        Storage.storeTillæg(tillæg);
-        return tillæg;
-    }
-
-    public static ArrayList<Tillæg> getTillæg(){
-        return Storage.getTillæg();
-    }*/
-
-    /*public static void deleteTillæg(Tillæg tillæg){
-        Storage.deleteTillæg(tillæg);
-    }*/
 
     // Udflugt
 
@@ -52,9 +33,6 @@ public class Controller {
         return Storage.getUdflugter();
     }
 
-    /*public static void deleteUdflugt(Udflugt udflugt){
-        Storage.deleteUdflugt(udflugt);
-    }*/
 
     // Konference
 
@@ -68,9 +46,6 @@ public class Controller {
         return Storage.getKonferencer();
     }
 
-    /*public static void deleteKonference(Konference konference){
-        Storage.deleteKonference(konference);
-    }*/
 
     // Deltager
 
@@ -84,22 +59,6 @@ public class Controller {
         return Storage.getDeltagere();
     }
 
-    /*public static void deleteDeltager(Deltager deltager){
-        Storage.deleteDeltager(deltager);
-    }*/
-
-    // Ledsager
-
-    /*public static Ledsager createLedsager(String navn){
-        Ledsager ledsager = new Ledsager(navn);
-        Storage.storeLedsager(ledsager);
-        return ledsager;
-    }
-
-    public static ArrayList<Ledsager> getLedsagere(){
-        return Storage.getLedsagere();
-    }*/
-
 
     // opret konference: add metoder
 
@@ -111,9 +70,6 @@ public class Controller {
         return hotel.createTillæg(navn, pris);
     }
 
-    /*public static void addUdflugtTilKonference(Konference konference, ArrayList<Udflugt> udflugter){
-        konference.tilføjUdflugt(udflugter);
-    }*/
 
     // opret tilmelding: add metoder
 
@@ -131,5 +87,86 @@ public class Controller {
 
     public static void addUdflugtTilLedsagerPåDeltager(Udflugt udflugt, Deltager deltager){
         deltager.getLedsager().addUdflugt(udflugt);
+    }
+
+
+    // lister
+
+    public static ArrayList<String> getDeltagereStringForKonference(Konference konference) {
+        ArrayList<String> deltagerListe = new ArrayList<>();
+
+        ArrayList<Deltager> deltagere = konference.getDeltagere();
+        for(int i = 0; i < deltagere.size(); i++){
+            String navn = deltagere.get(i).getNavn();
+            deltagerListe.add(navn);
+
+            String byEllerLand = deltagere.get(i).getByEllerLand();
+            deltagerListe.add(byEllerLand);
+
+            String tlf = Integer.toString(deltagere.get(i).getTlfNr());
+            deltagerListe.add(tlf);
+
+            String foredragsholder = "Er ikke foredragsholder";
+            if(deltagere.get(i).isErForedragsholder()){
+                foredragsholder = "Er foredragsholder";
+            }
+            deltagerListe.add(foredragsholder);
+
+            String deltagerdatoer = "Deltager fra " + deltagere.get(i).getAnkomstdato().toString() +
+                    " til " + deltagere.get(i).getAfrejsedato().toString();
+            deltagerListe.add(deltagerdatoer);
+
+            if(deltagere.get(i).getFirmanavn() != null){
+                String firmanavn = deltagere.get(i).getFirmanavn();
+                deltagerListe.add("Firma: " + firmanavn);
+            }
+        }
+
+        return deltagerListe;
+    }
+
+    public static ArrayList<String> getUdflugterStringForKonference(Konference konference) {
+        ArrayList<String> udflugtListe = new ArrayList<>();
+
+        ArrayList<Udflugt> udflugter = konference.getUdflugter();
+        for(int i = 0; i < udflugter.size(); i++){
+            udflugtListe.add(udflugter.get(i).getBeskrivelse());
+
+            udflugtListe.add("Deltagende ledsagere:");
+            for(Ledsager ledsager : udflugter.get(i).getLedsagere()){
+                String ledsagernavn = ledsager.getNavn();
+                String deltagernavn = ledsager.getDeltager().getNavn();
+                String deltagertlf = Integer.toString(ledsager.getDeltager().getTlfNr());
+                udflugtListe.add(ledsagernavn + " (" + deltagernavn + " " + deltagertlf + ")");
+            }
+        }
+
+        return udflugtListe;
+    }
+
+    public static ArrayList<String> getHotellerStringForKonference(Konference konference) {
+        ArrayList<String> hotelListe = new ArrayList<>();
+
+        ArrayList<Hotel> hoteller = konference.getHoteller();
+        for(int i = 0; i < hoteller.size(); i++){
+            if(!hoteller.get(i).getDeltagere().isEmpty()){
+                hotelListe.add(hoteller.get(i).getHotelnavn());
+            }
+
+            for(Deltager deltager : hoteller.get(i).getDeltagere()){
+                String deltagernavn = deltager.getNavn();
+                String ledsagernavn = "";
+                if(deltager.getLedsager() != null){
+                    ledsagernavn = " og " + deltager.getLedsager().getNavn();
+                }
+                hotelListe.add("Booking: " + deltagernavn + ledsagernavn);
+
+                for(Tillæg tillæg : deltager.getTillæg()){
+                    hotelListe.add("tillæg: " + tillæg.getNavn());
+                }
+            }
+        }
+
+        return hotelListe;
     }
 }

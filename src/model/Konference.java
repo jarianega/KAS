@@ -29,79 +29,15 @@ public class Konference {
         return pris;
     }
 
-    // lister
-
-    public ArrayList<String> getDeltagereString() {
-        ArrayList<String> deltagerListe = new ArrayList<>();
-        for(int i = 0; i < deltagere.size(); i++){
-            String navn = deltagere.get(i).getNavn();
-            deltagerListe.add(navn);
-
-            String byEllerLand = deltagere.get(i).getByEllerLand();
-            deltagerListe.add(byEllerLand);
-
-            String tlf = Integer.toString(deltagere.get(i).getTlfNr());
-            deltagerListe.add(tlf);
-
-            String foredragsholder = "Er ikke foredragsholder";
-            if(deltagere.get(i).isErForedragsholder()){
-                foredragsholder = "Er foredragsholder";
-            }
-            deltagerListe.add(foredragsholder);
-
-            String deltagerdatoer = "Deltager fra " + deltagere.get(i).getAnkomstdato().toString() +
-                    " til " + deltagere.get(i).getAfrejsedato().toString();
-            deltagerListe.add(deltagerdatoer);
-
-            if(deltagere.get(i).getFirmanavn() != null){
-                String firmanavn = deltagere.get(i).getFirmanavn();
-                deltagerListe.add("Firma: " + firmanavn);
-            }
-        }
-
-        return deltagerListe;
+    public ArrayList<Deltager> getDeltagere() {
+        return new ArrayList<>(deltagere);
     }
 
-    public ArrayList<String> getUdflugterString() {
-        ArrayList<String> udflugtListe = new ArrayList<>();
-
-        for(int i = 0; i < udflugter.size(); i++){
-            udflugtListe.add(udflugter.get(i).getBeskrivelse());
-
-            udflugtListe.add("Deltagende ledsagere:");
-            for(Ledsager ledsager : udflugter.get(i).getLedsagere()){
-                String ledsagernavn = ledsager.getNavn();
-                String deltagernavn = ledsager.getDeltager().getNavn();
-                String deltagertlf = Integer.toString(ledsager.getDeltager().getTlfNr());
-                udflugtListe.add(ledsagernavn + " (" + deltagernavn + " " + deltagertlf + ")");
-            }
-        }
-
-        return udflugtListe;
+    public ArrayList<Udflugt> getUdflugter() {
+        return new ArrayList<>(udflugter);
     }
 
-    public ArrayList<String> getHotellerString() {
-        ArrayList<String> hotelListe = new ArrayList<>();
-
-        for(int i = 0; i < hoteller.size(); i++){
-            if(!hoteller.get(i).getDeltagere().isEmpty()){
-                hotelListe.add(hoteller.get(i).getHotelnavn());
-            }
-
-            for(Deltager deltager : hoteller.get(i).getDeltagere()){
-                String deltagernavn = deltager.getNavn();
-                String ledsagernavn = "";
-                if(deltager.getLedsager() != null){
-                    ledsagernavn = " og " + deltager.getLedsager().getNavn();
-                }
-                hotelListe.add("Booking: " + deltagernavn + ledsagernavn);
-
-                for(Tillæg tillæg : deltager.getTillæg()){
-                    hotelListe.add("tillæg: " + tillæg.getNavn());
-                }
-            }
-        }
-
-        return hotelListe;
+    public ArrayList<Hotel> getHoteller() {
+        return new ArrayList<>(hoteller);
     }
 }

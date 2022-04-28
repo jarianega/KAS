@@ -55,8 +55,8 @@ public class Test {
         Controller.addUdflugtTilLedsagerPåDeltager(u1, d5);
         System.out.println(d5.beregnSamletPris());
 
-        System.out.println(k1.getDeltagereString());
-        System.out.println(k1.getUdflugterString());
-        System.out.println(k1.getHotellerString());
+        System.out.println(Controller.getDeltagereStringForKonference(k1));
+        System.out.println(Controller.getUdflugterStringForKonference(k1));
+        System.out.println(Controller.getHotellerStringForKonference(k1));
     }
 }
