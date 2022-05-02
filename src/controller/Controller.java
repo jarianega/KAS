@@ -90,7 +90,7 @@ public class Controller {
     }
 
 
-    // lister
+    // oversigter
 
     public static ArrayList<String> getDeltagereStringForKonference(Konference konference) {
         ArrayList<String> deltagerListe = new ArrayList<>();
