@@ -3,10 +3,7 @@ package gui;
 import controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -76,18 +73,23 @@ public class TilmeldingPane extends GridPane {
         this.add(cbHoteller, 0, 10);
         cbHoteller.getSelectionModel().selectFirst();
 
-        private void TilmeldAction() {
-            String navn = txfNavn.getText();
-            String adresse = txfAdresse.getText();
-            String byellerland = txfBy.getText();
-            int tlfnummer = Integer.parseInt(txfTlf.getText());
-            LocalDate ankomst = LocalDate.parse(txfAnkomst.getText());
-            LocalDate afrejse = LocalDate.parse(txfAfrejse.getText());
-            boolean foredragsholder = rdbForedragsholder.isSelected();
-            Konference konference =
-            Controller.createDeltager(navn,adresse,byellerland,tlfnummer,foredragsholder,ankomst,afrejse,cbKonferencer.sele);
 
-        }
+        Button btnTilmeld = new Button("Tilmeld");
+        this.add(btnTilmeld, 0, 11);
+
+    }
+
+    private void TilmeldAction() {
+        String navn = txfNavn.getText();
+        String adresse = txfAdresse.getText();
+        String byellerland = txfBy.getText();
+        int tlfnummer = Integer.parseInt(txfTlf.getText());
+        LocalDate ankomst = LocalDate.parse(txfAnkomst.getText());
+        LocalDate afrejse = LocalDate.parse(txfAfrejse.getText());
+        boolean foredragsholder = rdbForedragsholder.isSelected();
+        Object konference = cbKonferencer.getSelectionModel().getSelectedIndex();
+        Controller.createDeltager(navn,adresse,byellerland,tlfnummer,foredragsholder,ankomst,afrejse, (Konference) konference);
+
     }
 
     private void visLedsagerTilmelding() {
