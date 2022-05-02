@@ -58,7 +58,14 @@ public class OpretUdflugtWindow extends Stage {
         String udflugtBeskrivelse = txfUdflugtBeskrivelse.getText();
         LocalDate udflugtDato = LocalDate.parse(txfUdflugtDato.getText());
         int udflugtPris = Integer.parseInt(txfUdflugtPris.getText());
-        Object konference = cbKonferencer.getSelectionModel().getSelectedItem();
-        Controller.createUdflugt(udflugtBeskrivelse, udflugtDato, udflugtPris, (Konference) konference);
+        String konferencenavn = (String) cbKonferencer.getSelectionModel().getSelectedItem();
+        Konference konference = null;
+        for(Konference k : Controller.getKonferencer()){
+            if(konferencenavn.equals(k.getNavn())){
+                konference = k;
+            }
+        }
+
+        Controller.createUdflugt(udflugtBeskrivelse, udflugtDato, udflugtPris, konference);
     }
 }

@@ -14,7 +14,7 @@ public class OpretHotelWindow extends Stage {
     private final TextField txfHotelNavn = new TextField("Hotelnavn");
     private final TextField txfHotelPris = new TextField("Pris enkeltværelse");
     private final TextField txfHotelDobbeltPris = new TextField ("Pris dobbeltværelse");
-    Button btnTilføjTillæg = new Button("Tilføl tillæg");
+    Button btnTilføjTillæg = new Button("Tilføj tillæg");
 
     public OpretHotelWindow() {
         this.initStyle(StageStyle.UTILITY);

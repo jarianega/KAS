@@ -53,8 +53,15 @@ public class OpretTillægWindow extends Stage {
     private void opretAction() {
         String navn = txfOpretTillæg.getText();
         int pris = Integer.parseInt(txfOpretTillægPris.getText());
-        Object hotel = cbHoteller.getSelectionModel().getSelectedItem();
-        Controller.createAndAddTillægTilHotel((Hotel) hotel, navn, pris);
+        String hotelnavn = (String) cbHoteller.getSelectionModel().getSelectedItem();
+        Hotel hotel = null;
+        for(Hotel h : Controller.getHoteller()){
+            if(hotelnavn.equals(h.getHotelnavn())){
+                hotel = h;
+            }
+        }
+
+        Controller.createAndAddTillægTilHotel(hotel, navn, pris);
     }
 
 }

@@ -57,35 +57,52 @@ public class OversigtPane extends GridPane {
     }
 
     public void setDeltagereText() {
-        Object konference = cbKonferencer.getSelectionModel().getSelectedItem();
+        String konferencenavn = cbKonferencer.getSelectionModel().getSelectedItem();
+        Konference konference = null;
+        for (Konference k : Controller.getKonferencer()) {
+            if(konferencenavn.equals(k.getNavn())){
+                konference = k;
+            }
+        }
 
         StringBuilder text = new StringBuilder();
-        for (int i = 0; i < Controller.getDeltagereStringForKonference((Konference) konference).size(); i++) {
-            text.append(Controller.getDeltagereStringForKonference((Konference) konference).get(i) + "\n");
+        for (String linje : Controller.getUdflugterStringForKonference(konference)) {
+            text.append(linje + "\n");
         }
         txaDeltagere.setText(text.toString());
     }
 
     public void setUdflugterText() {
-        Object konference = cbKonferencer.getSelectionModel().getSelectedItem();
+        String konferencenavn = cbKonferencer.getSelectionModel().getSelectedItem();
+        Konference konference = null;
+        for (Konference k : Controller.getKonferencer()) {
+            if(konferencenavn.equals(k.getNavn())){
+                konference = k;
+            }
+        }
 
         StringBuilder text = new StringBuilder();
-            for (String linje : Controller.getUdflugterStringForKonference((Konference) konference)) {
+            for (String linje : Controller.getUdflugterStringForKonference(konference)) {
                 text.append(linje + "\n");
             }
             txaUdflugter.setText(text.toString());
         }
 
-
     public void setHotellerText() {
+        String konferencenavn = cbKonferencer.getSelectionModel().getSelectedItem();
+        Konference konference = null;
+        for (Konference k : Controller.getKonferencer()) {
+            if(konferencenavn.equals(k.getNavn())){
+                konference = k;
+            }
+        }
+
         StringBuilder text = new StringBuilder();
-        for (Konference konference : Controller.getKonferencer()) {
-            for (String linje : Controller.getHotellerStringForKonference(konference)) {
+        for (String linje : Controller.getHotellerStringForKonference(konference)) {
                 text.append(linje + "\n");
             }
             txaHoteller.setText(text.toString());
         }
-    }
 
     public void selectKonference() {
         setDeltagereText();
