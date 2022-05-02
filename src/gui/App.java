@@ -7,9 +7,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Application;
+
 public class App {
     public static void main(String[] args) {
-        Gui.launch(Gui.class);
+        Application.launch(Gui.class);
         initStorage();
     }
 
