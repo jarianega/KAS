@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
@@ -9,11 +10,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.Konference;
 import org.w3c.dom.Text;
+import storage.Storage;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class TilmeldingPane extends GridPane {
-    String arKonferencer[] = {"konference 1", "konference 2", "konference 3"};
-    ComboBox cbKonferencer = new ComboBox(FXCollections.observableArrayList(arKonferencer));
+    private Controller controller = new Controller();
+
+    ComboBox cbKonferencer = new ComboBox(FXCollections.observableArrayList(controller.getKonferencer()));
+
     private final TextField txfNavn = new TextField("Dit navn");
     private final TextField txfAdresse = new TextField("Din adresse");
     private final TextField txfBy = new TextField("Land/By");
@@ -24,13 +32,12 @@ public class TilmeldingPane extends GridPane {
     private final TextField txfFirmaTlf = new TextField("Firma telefon");
     private final RadioButton rdbErLedsager = new RadioButton();
     private final Label lblErLedsager = new Label("Har du en ledsager?");
-    private final TextField ledsagerNavn = new TextField("Ledsager navn");
+    private final TextField txfLedsagerNavn = new TextField("Ledsager navn");
 
-    String arUdflugter[] = {"Udflugt 1", "Udflugt 2", "Udflugt 3"};
-    private final ComboBox cbLedsagerUdflugter = new ComboBox(FXCollections.observableArrayList(arUdflugter));
+    private final ComboBox cbLedsagerUdflugter = new ComboBox(FXCollections.observableArrayList(controller.getUdflugter()));
 
-    String arHoteller[] = {"Hotel 1", "Hotel 2", "Hotel 3"};
-    private final ComboBox cbHoteller = new ComboBox(FXCollections.observableArrayList(arHoteller));
+    //String arHoteller[] = {"Hotel 1", "Hotel 2", "Hotel 3"};
+    private final ComboBox cbHoteller = new ComboBox(FXCollections.observableArrayList(controller.getHoteller()));
 
     public TilmeldingPane() {
         this.setPadding(new Insets(20));
@@ -39,6 +46,8 @@ public class TilmeldingPane extends GridPane {
         this.setGridLinesVisible(false);
 
         this.add(cbKonferencer, 0, 0);
+        cbKonferencer.getSelectionModel().selectFirst();
+
         this.add(txfNavn, 0, 1);
         this.add(txfAdresse, 0, 2);
         this.add(txfBy, 0, 3);
@@ -51,25 +60,29 @@ public class TilmeldingPane extends GridPane {
         this.add(txfFirmaNavn,0, 6);
         this.add(txfFirmaTlf, 0, 7);
 
+        HBox ledsagerHBox = new HBox(2);
+        ledsagerHBox.getChildren().addAll(rdbErLedsager, lblErLedsager);
+        this.add(ledsagerHBox, 0, 8);
+
         VBox vbox = new VBox(2);
-        this.add(rdbErLedsager, 0, 8);
-        this.add(lblErLedsager, 1, 8);
-        vbox.getChildren().addAll(ledsagerNavn, cbLedsagerUdflugter);
+        vbox.getChildren().addAll(txfLedsagerNavn, cbLedsagerUdflugter);
         this.add(vbox, 0, 9);
-        ledsagerNavn.isDisabled();
-        cbLedsagerUdflugter.isDisabled();
+        txfLedsagerNavn.setDisable(true);
+        cbLedsagerUdflugter.setDisable(true);
+        cbLedsagerUdflugter.getSelectionModel().selectFirst();
         rdbErLedsager.setOnAction(event -> this.visLedsagerTilmelding());
 
         this.add(cbHoteller, 0, 10);
+        cbHoteller.getSelectionModel().selectFirst();
     }
 
     private void visLedsagerTilmelding() {
-        if(!ledsagerNavn.isVisible()) {
-            ledsagerNavn.isEditable();
-            cbLedsagerUdflugter.isEditable();
+        if(txfLedsagerNavn.isDisabled()) {
+            txfLedsagerNavn.setDisable(false);
+            cbLedsagerUdflugter.setDisable(false);
         } else {
-            ledsagerNavn.isEditable();
-            cbLedsagerUdflugter.isEditable();
+            txfLedsagerNavn.setDisable(true);
+            cbLedsagerUdflugter.setDisable(true);
         }
     }
 }
