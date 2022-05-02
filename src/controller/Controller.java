@@ -120,6 +120,8 @@ public class Controller {
                 String firmanavn = deltagere.get(i).getFirmanavn();
                 deltagerListe.add("Firma: " + firmanavn);
             }
+
+            deltagerListe.add(" ");
         }
 
         return deltagerListe;
@@ -139,6 +141,8 @@ public class Controller {
                 String deltagertlf = Integer.toString(ledsager.getDeltager().getTlfNr());
                 udflugtListe.add(ledsagernavn + " (" + deltagernavn + " " + deltagertlf + ")");
             }
+
+            udflugtListe.add(" ");
         }
 
         return udflugtListe;
@@ -164,7 +168,11 @@ public class Controller {
                 for(Tillæg tillæg : deltager.getTillæg()){
                     hotelListe.add("tillæg: " + tillæg.getNavn());
                 }
+
+                hotelListe.add(" ");
             }
+
+            hotelListe.add(" ");
         }
 
         return hotelListe;

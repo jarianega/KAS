@@ -9,8 +9,8 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        Gui.launch(Gui.class);
         initStorage();
+        Gui.launch(Gui.class);
     }
 
     public static void initStorage(){
