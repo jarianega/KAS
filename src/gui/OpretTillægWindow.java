@@ -18,7 +18,7 @@ public class OpretTillægWindow extends Stage {
     private final TextField txfOpretTillægPris = new TextField ("Pris på tillæg");
     ComboBox cbHoteller = new ComboBox<>();
 
-    public OpretHotelWindow() {
+    public OpretTillægWindow() {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
@@ -41,7 +41,7 @@ public class OpretTillægWindow extends Stage {
         pane.add(txfOpretTillægPris,0,1);
 
         for(Hotel hotel : Controller.getHoteller()){
-            cbHoteller = new ComboBox(FXCollections.observableArrayList(hotel.getHotelnavn());
+            cbHoteller = new ComboBox<>(FXCollections.observableArrayList(hotel.getHotelnavn()));
         }
         pane.add(cbHoteller, 0, 2);
 
@@ -53,8 +53,8 @@ public class OpretTillægWindow extends Stage {
     private void opretAction() {
         String navn = txfOpretTillæg.getText();
         int pris = Integer.parseInt(txfOpretTillægPris.getText());
-
-        Controller.createAndAddTillægTilHotel(, );
+        Object hotel = cbHoteller.getSelectionModel().getSelectedItem();
+        Controller.createAndAddTillægTilHotel((Hotel) hotel, navn, pris);
     }
 
 }
