@@ -15,6 +15,7 @@ import javafx.stage.StageStyle;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.security.cert.PolicyNode;
+import java.time.LocalDate;
 
 
 public class OpretKonferencePane extends GridPane {
@@ -38,8 +39,6 @@ public class OpretKonferencePane extends GridPane {
     private final TextField txfTillæg2 = new TextField ("Tillæg 2");
     private final TextField txfTillæg3 = new TextField ("Tillæg 3");
     private final TextField txfTillæg4 = new TextField ("Tillæg 4");
-    private final TextField txfTillægPris2 = new TextField ("Tillæg 2 pris");
-    private final TextField txfTillægPris3 = new TextField ("Tillæg 3 pris");
 
 
     public OpretKonferencePane() {
@@ -59,20 +58,16 @@ public class OpretKonferencePane extends GridPane {
         this.add(txfHotelPris,0,8);
         this.add(txfHotelDobbeltPris,1,8);
         this.add(txfOpretTillæg,0,9);
-        this.add(txfOpretTillægPris,0,10);
+        this.add(txfOpretTillægPris,1,9);
         this.add(txfUdflugtBeskrivelse,0,11);
         this.add(txfUdflugtDato,0,12);
         this.add(txfUdflugtPris,0,13);
         this.add(btnOpretUdflugt,0,14);
         this.add(txfTillæg2,1,9);
-        this.add(txfTillæg3,2,9);
-        this.add(txfTillægPris2,1,10);
-        this.add(txfTillægPris3,2,10);
-
         
         btnOpretHotel.setOnAction(event -> this.HotelAction());
-
-
+        btnOpretUdflugt.setOnAction(event -> this.udflugtAction());
+        
 
 
     }
@@ -84,6 +79,13 @@ public class OpretKonferencePane extends GridPane {
         Controller.createHotel(navn,pris,dobbeltpris);
 
 
+    }
+
+    private void udflugtAction() {
+        String udflugtBeskrivelse = txfUdflugtBeskrivelse.getText();
+        LocalDate udflugtDato = LocalDate.parse(txfUdflugtDato.getText());
+        int udflugtPris = Integer.parseInt(txfUdflugtPris.getText());
+        Controller.createUdflugt(udflugtBeskrivelse, udflugtDato, udflugtPris, );
     }
 
 }
