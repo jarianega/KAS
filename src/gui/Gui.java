@@ -32,20 +32,20 @@ public class Gui extends Application {
 
         OpretKonferencePane konferencePane = new OpretKonferencePane();
         tabOpretKonference.setContent(konferencePane);
-        tabOpretKonference.setOnSelectionChanged(event -> konferencePane.updateControls());
+        // tabOpretKonference.setOnSelectionChanged(event -> konferencePane.updateControls());
 
         Tab tabTilmelding = new Tab("Tilmelding");
         tabPane.getTabs().add(tabTilmelding);
 
         TilmeldingPane tilmeldingPane = new TilmeldingPane();
         tabTilmelding.setContent(tilmeldingPane);
-        tabTilmelding.setOnSelectionChanged(event -> tilmeldingPane.updateControls());
+        // tabTilmelding.setOnSelectionChanged(event -> tilmeldingPane.updateControls());
 
         Tab tabOversigt = new Tab("Oversigter");
         tabPane.getTabs().add(tabOversigt);
 
         OversigtPane oversigtPane = new OversigtPane();
         tabOversigt.setContent(oversigtPane);
-        tabOversigt.setOnSelectionChanged(event -> oversigtPane.updateControls());
+        // tabOversigt.setOnSelectionChanged(event -> oversigtPane.updateControls());
     }
 }
