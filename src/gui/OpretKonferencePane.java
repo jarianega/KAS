@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,6 +35,10 @@ public class OpretKonferencePane extends GridPane {
     private final TextField txfUdflugtBeskrivelse = new TextField ("Beskrivelse af udflugt");
     private final TextField txfUdflugtDato = new TextField ("Dato på udflugt");
     private final TextField txfUdflugtPris = new TextField ("Pris på udflugt");
+    private final TextField txfTillæg2 = new TextField ("Tillæg 2");
+    private final TextField txfTillæg3 = new TextField ("Tillæg 3");
+    private final TextField txfTillæg4 = new TextField ("Tillæg 4");
+
 
     public OpretKonferencePane() {
         this.setPadding(new Insets(20));
@@ -57,6 +62,21 @@ public class OpretKonferencePane extends GridPane {
         this.add(txfUdflugtDato,0,12);
         this.add(txfUdflugtPris,0,13);
         this.add(btnOpretUdflugt,0,14);
+        this.add(txfTillæg2,1,9);
+        
+        btnOpretHotel.setOnAction(event -> this.HotelAction());
+        
+        
+
+
+    }
+
+    private void HotelAction() {
+       String navn = txfHotelNavn.getText();
+       int pris = txfHotelPris.getText();
+       int dobbeltpris = txfHotelDobbeltPris();
+        Controller.createHotel(navn,pris,dobbeltpris);
+
 
     }
 
