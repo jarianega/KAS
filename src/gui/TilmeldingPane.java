@@ -7,14 +7,16 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.Hotel;
 import model.Konference;
+import model.Udflugt;
 
 import java.time.LocalDate;
 
 public class TilmeldingPane extends GridPane {
     private Controller controller = new Controller();
 
-    ComboBox cbKonferencer = new ComboBox(FXCollections.observableArrayList(Controller.getKonferencer()));
+    ComboBox cbKonferencer = new ComboBox();
 
     private final TextField txfNavn = new TextField("Dit navn");
     private final TextField txfAdresse = new TextField("Din adresse");
@@ -30,10 +32,10 @@ public class TilmeldingPane extends GridPane {
     private final RadioButton rdbForedragsholder = new RadioButton();
 
 
-    private final ComboBox cbLedsagerUdflugter = new ComboBox(FXCollections.observableArrayList(controller.getUdflugter()));
+    private ComboBox cbLedsagerUdflugter = new ComboBox();
 
     //String arHoteller[] = {"Hotel 1", "Hotel 2", "Hotel 3"};
-    private final ComboBox cbHoteller = new ComboBox(FXCollections.observableArrayList(controller.getHoteller()));
+    private ComboBox cbHoteller = new ComboBox();
 
     public TilmeldingPane() {
         this.setPadding(new Insets(20));
@@ -41,8 +43,10 @@ public class TilmeldingPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
+        for (Konference konference : Controller.getKonferencer()) {
+            cbKonferencer = new ComboBox<>(FXCollections.observableArrayList(konference.getNavn()));
+        }
         this.add(cbKonferencer, 0, 0);
-        cbKonferencer.getSelectionModel().selectFirst();
 
         this.add(txfNavn, 0, 1);
         this.add(txfAdresse, 0, 2);
@@ -59,7 +63,10 @@ public class TilmeldingPane extends GridPane {
         HBox ledsagerHBox = new HBox(2);
         ledsagerHBox.getChildren().addAll(rdbErLedsager, lblErLedsager);
         this.add(ledsagerHBox, 0, 8);
-
+        
+        for(Udflugt udflugt : Controller.getUdflugter()){
+            cbLedsagerUdflugter.setItems(FXCollections.observableArrayList(udflugt.getBeskrivelse()));
+        }
         VBox vbox = new VBox(2);
         vbox.getChildren().addAll(txfLedsagerNavn, cbLedsagerUdflugter);
         this.add(vbox, 0, 9);
@@ -70,12 +77,16 @@ public class TilmeldingPane extends GridPane {
 
         this.add(rdbForedragsholder,5,10);
 
+        for(Hotel hotel : Controller.getHoteller()){
+            cbHoteller = new ComboBox<>(FXCollections.observableArrayList(hotel.getHotelnavn()));
+        }
         this.add(cbHoteller, 0, 10);
         cbHoteller.getSelectionModel().selectFirst();
 
 
         Button btnTilmeld = new Button("Tilmeld");
         this.add(btnTilmeld, 0, 11);
+        btnTilmeld.setOnAction(event -> TilmeldAction());
 
     }
 
@@ -87,8 +98,14 @@ public class TilmeldingPane extends GridPane {
         LocalDate ankomst = LocalDate.parse(txfAnkomst.getText());
         LocalDate afrejse = LocalDate.parse(txfAfrejse.getText());
         boolean foredragsholder = rdbForedragsholder.isSelected();
-        Object konference = cbKonferencer.getSelectionModel().getSelectedIndex();
-        Controller.createDeltager(navn,adresse,byellerland,tlfnummer,foredragsholder,ankomst,afrejse, (Konference) konference);
+        String konferencenavn = (String) cbKonferencer.getSelectionModel().getSelectedItem();
+        Konference konference = null;
+        for(Konference k : Controller.getKonferencer()){
+            if(konferencenavn.equals(k.getNavn())){
+                konference = k;
+            }
+        }
+        Controller.createDeltager(navn,adresse,byellerland,tlfnummer,foredragsholder,ankomst,afrejse,konference);
 
     }
 

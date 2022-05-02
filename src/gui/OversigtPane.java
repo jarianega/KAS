@@ -66,7 +66,7 @@ public class OversigtPane extends GridPane {
         }
 
         StringBuilder text = new StringBuilder();
-        for (String linje : Controller.getUdflugterStringForKonference(konference)) {
+        for (String linje : Controller.getDeltagereStringForKonference(konference)) {
             text.append(linje + "\n");
         }
         txaDeltagere.setText(text.toString());
