@@ -16,6 +16,8 @@ public class OpretKonferencePane extends GridPane {
     private final TextField txfPris = new TextField("Pris per dag");
     private final Button btnOpretHotel = new Button("Opret Hotel");
     private final Button btnOpretUdflugt = new Button("Opret Udflugt");
+    private final Button btnOpretKonference = new Button ("Opret Konference");
+
 
 
     public OpretKonferencePane() {
@@ -30,6 +32,7 @@ public class OpretKonferencePane extends GridPane {
         this.add(txfSlutDato,0,3);
         this.add(txfOrganisation, 0, 4);
         this.add(txfPris,0,5);
+        this.add(btnOpretKonference,0,6);
         this.add(btnOpretHotel,0,10);
         this.add(btnOpretUdflugt,0,14);
         
