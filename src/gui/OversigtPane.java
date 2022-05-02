@@ -1,7 +1,9 @@
 package gui;
 
 import controller.Controller;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -13,6 +15,7 @@ public class OversigtPane extends GridPane {
     private final TextArea txaDeltagere = new TextArea();
     private final TextArea txaUdflugter = new TextArea();
     private final TextArea txaHoteller = new TextArea();
+    private ComboBox<String> cbKonferencer = new ComboBox<>();
 
     public OversigtPane() {
         this.setPadding(new Insets(20));
@@ -20,61 +23,73 @@ public class OversigtPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
+        Label lblKonference = new Label("Vælg konference:");
+        this.add(lblKonference, 0, 0);
+        for (Konference konference : Controller.getKonferencer()) {
+            cbKonferencer = new ComboBox<>(FXCollections.observableArrayList(konference.getNavn()));
+        }
+        this.add(cbKonferencer, 0, 1);
+        cbKonferencer.setOnAction(event -> selectKonference());
+
         HBox deltagerBox = new HBox();
-        this.add(deltagerBox, 0, 0);
+        this.add(deltagerBox, 0, 2);
         Label lblDeltagere = new Label("Deltagere:  ");
         deltagerBox.getChildren().add(lblDeltagere);
         deltagerBox.getChildren().add(txaDeltagere);
         txaDeltagere.setEditable(false);
         txaDeltagere.setPrefWidth(300);
-        setDeltagereText();
 
-        HBox udfulgterBox = new HBox();
-        this.add(udfulgterBox, 0, 1);
+        HBox udflugterBox = new HBox();
+        this.add(udflugterBox, 0, 3);
         Label lblUdflugter = new Label("Udlugter:    ");
-        udfulgterBox.getChildren().add(lblUdflugter);
-        udfulgterBox.getChildren().add(txaUdflugter);
+        udflugterBox.getChildren().add(lblUdflugter);
+        udflugterBox.getChildren().add(txaUdflugter);
         txaUdflugter.setEditable(false);
         txaUdflugter.setPrefWidth(300);
-        setUdflugterText();
 
         HBox hotellerBox = new HBox();
-        this.add(hotellerBox, 0, 2);
+        this.add(hotellerBox, 0, 4);
         Label lblHoteller = new Label("Hoteller:      ");
         hotellerBox.getChildren().add(lblHoteller);
         hotellerBox.getChildren().add(txaHoteller);
         txaHoteller.setEditable(false);
         txaHoteller.setPrefWidth(300);
-        setHotellerText();
     }
 
     public void setDeltagereText() {
-       StringBuilder text = new StringBuilder();
-        for (Konference konference : Controller.getKonferencer()) {
-            for(String linje : Controller.getDeltagereStringForKonference(konference)){
-                    text.append(linje + "\n");
-                }
-            txaDeltagere.setText(text.toString());
+        Object konference = cbKonferencer.getSelectionModel().getSelectedItem();
+
+        StringBuilder text = new StringBuilder();
+        for (int i = 0; i < Controller.getDeltagereStringForKonference((Konference) konference).size(); i++) {
+            text.append(Controller.getDeltagereStringForKonference((Konference) konference).get(i) + "\n");
         }
+        txaDeltagere.setText(text.toString());
     }
 
     public void setUdflugterText() {
+        Object konference = cbKonferencer.getSelectionModel().getSelectedItem();
+
         StringBuilder text = new StringBuilder();
-        for (Konference konference : Controller.getKonferencer()) {
-            for(String linje : Controller.getUdflugterStringForKonference(konference)){
+            for (String linje : Controller.getUdflugterStringForKonference((Konference) konference)) {
                 text.append(linje + "\n");
             }
             txaUdflugter.setText(text.toString());
         }
-    }
 
-    public void setHotellerText(){
+
+    public void setHotellerText() {
         StringBuilder text = new StringBuilder();
         for (Konference konference : Controller.getKonferencer()) {
-            for(String linje : Controller.getHotellerStringForKonference(konference)){
+            for (String linje : Controller.getHotellerStringForKonference(konference)) {
                 text.append(linje + "\n");
             }
             txaHoteller.setText(text.toString());
         }
+    }
+
+    public void selectKonference() {
+        setDeltagereText();
+        setUdflugterText();
+        setHotellerText();
     }
 }
