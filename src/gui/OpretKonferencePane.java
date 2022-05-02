@@ -64,6 +64,7 @@ public class OpretKonferencePane extends GridPane {
         this.add(txfUdflugtPris,0,13);
         this.add(btnOpretUdflugt,0,14);
         this.add(txfTillæg2,1,9);
+        this.add(txfTillæg3,1,10);
         
         btnOpretHotel.setOnAction(event -> this.HotelAction());
         btnOpretUdflugt.setOnAction(event -> this.udflugtAction());
