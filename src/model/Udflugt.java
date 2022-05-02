@@ -33,4 +33,8 @@ public class Udflugt {
     public ArrayList<Ledsager> getLedsagere() {
         return ledsagere;
     }
+
+    public String getKonference() {
+        return konference.getNavn();
+    }
 }

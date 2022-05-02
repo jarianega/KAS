@@ -1,10 +1,10 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Konference {
+    private String navn;
     private String sted;
     private LocalDate startDato;
     private LocalDate slutDato;
@@ -14,11 +14,16 @@ public class Konference {
     private Organisation organisation;
     private int pris;
 
-    public Konference(String sted, LocalDate startDato, LocalDate slutDato, int pris) {
+    public Konference(String navn, String sted, LocalDate startDato, LocalDate slutDato, int pris) {
+        this.navn = navn;
         this.sted = sted;
         this.startDato = startDato;
         this.slutDato = slutDato;
         this.pris = pris;
+    }
+
+    public String getNavn() {
+        return navn;
     }
 
     public void tilføjHotel(ArrayList<Hotel> hoteller) { this.hoteller.addAll(hoteller); }

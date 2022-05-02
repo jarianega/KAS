@@ -36,8 +36,8 @@ public class Controller {
 
     // Konference
 
-    public static Konference createKonference(String sted, LocalDate startDato, LocalDate slutDato, int pris){
-        Konference konference = new Konference(sted, startDato, slutDato, pris);
+    public static Konference createKonference(String navn, String sted, LocalDate startDato, LocalDate slutDato, int pris){
+        Konference konference = new Konference(navn, sted, startDato, slutDato, pris);
         Storage.storeKonference(konference);
         return konference;
     }

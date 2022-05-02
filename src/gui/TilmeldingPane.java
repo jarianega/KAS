@@ -10,17 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.Konference;
-import org.w3c.dom.Text;
-import storage.Storage;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class TilmeldingPane extends GridPane {
     private Controller controller = new Controller();
 
-    ComboBox cbKonferencer = new ComboBox(FXCollections.observableArrayList(controller.getKonferencer()));
+    ComboBox cbKonferencer = new ComboBox(FXCollections.observableArrayList(Controller.getKonferencer()));
 
     private final TextField txfNavn = new TextField("Dit navn");
     private final TextField txfAdresse = new TextField("Din adresse");

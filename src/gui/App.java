@@ -1,13 +1,12 @@
 package gui;
 
 import controller.Controller;
+import javafx.application.Application;
 import model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.application.Application;
 
 public class App {
     public static void main(String[] args) {
@@ -16,7 +15,7 @@ public class App {
     }
 
     public static void initStorage(){
-        Konference k1 = Controller.createKonference("Odense Universitet", LocalDate.of(2021, 12, 18), LocalDate.of(2021, 12, 18), 1500);
+        Konference k1 = Controller.createKonference("Hav og Himmel", "Odense Universitet", LocalDate.of(2021, 12, 18), LocalDate.of(2021, 12, 18), 1500);
 
         Hotel h1 = Controller.createHotel("Den Hvide Svane", 1050, 1250);
         Hotel h2 = Controller.createHotel("Hotel Phønix", 700, 800);
