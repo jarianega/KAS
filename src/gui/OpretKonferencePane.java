@@ -15,6 +15,7 @@ import javafx.stage.StageStyle;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.security.cert.PolicyNode;
+import java.time.LocalDate;
 
 
 public class OpretKonferencePane extends GridPane {
@@ -65,7 +66,7 @@ public class OpretKonferencePane extends GridPane {
         this.add(txfTillæg2,1,9);
         
         btnOpretHotel.setOnAction(event -> this.HotelAction());
-        
+        btnOpretUdflugt.setOnAction(event -> this.udflugtAction());
         
 
 
@@ -78,6 +79,13 @@ public class OpretKonferencePane extends GridPane {
         Controller.createHotel(navn,pris,dobbeltpris);
 
 
+    }
+
+    private void udflugtAction() {
+        String udflugtBeskrivelse = txfUdflugtBeskrivelse.getText();
+        LocalDate udflugtDato = LocalDate.parse(txfUdflugtDato.getText());
+        int udflugtPris = Integer.parseInt(txfUdflugtPris.getText());
+        Controller.createUdflugt(udflugtBeskrivelse, udflugtDato, udflugtPris, );
     }
 
 }
