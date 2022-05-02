@@ -41,7 +41,7 @@ public class OpretTillægWindow extends Stage {
         pane.add(txfOpretTillægPris,0,1);
 
         for(Hotel hotel : Controller.getHoteller()){
-            cbHoteller = new ComboBox(FXCollections.observableArrayList(hotel.getHotelnavn());
+            cbHoteller = new ComboBox(FXCollections.observableArrayList(hotel.getHotelnavn()));
         }
         pane.add(cbHoteller, 0, 2);
 

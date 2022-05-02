@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.Konference;
+
+import java.time.LocalDate;
 
 public class TilmeldingPane extends GridPane {
     private Controller controller = new Controller();
@@ -27,6 +30,8 @@ public class TilmeldingPane extends GridPane {
     private final RadioButton rdbErLedsager = new RadioButton();
     private final Label lblErLedsager = new Label("Har du en ledsager?");
     private final TextField txfLedsagerNavn = new TextField("Ledsager navn");
+    private final RadioButton rdbForedragsholder = new RadioButton();
+
 
     private final ComboBox cbLedsagerUdflugter = new ComboBox(FXCollections.observableArrayList(controller.getUdflugter()));
 
@@ -66,8 +71,23 @@ public class TilmeldingPane extends GridPane {
         cbLedsagerUdflugter.getSelectionModel().selectFirst();
         rdbErLedsager.setOnAction(event -> this.visLedsagerTilmelding());
 
+        this.add(rdbForedragsholder,5,10);
+
         this.add(cbHoteller, 0, 10);
         cbHoteller.getSelectionModel().selectFirst();
+
+        private void TilmeldAction() {
+            String navn = txfNavn.getText();
+            String adresse = txfAdresse.getText();
+            String byellerland = txfBy.getText();
+            int tlfnummer = Integer.parseInt(txfTlf.getText());
+            LocalDate ankomst = LocalDate.parse(txfAnkomst.getText());
+            LocalDate afrejse = LocalDate.parse(txfAfrejse.getText());
+            boolean foredragsholder = rdbForedragsholder.isSelected();
+            Konference konference =
+            Controller.createDeltager(navn,adresse,byellerland,tlfnummer,foredragsholder,ankomst,afrejse,cbKonferencer.sele);
+
+        }
     }
 
     private void visLedsagerTilmelding() {
